@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class DBConnect {
+    String DB_URL;
+    String USERNAME;
+    String PASSWORD;
+    Connection getConnection();
+    void closeConnection(Connection connection);
+}
+
+class Item {
+    int id;
+    String type;
+    String name;
+    double price;
+    boolean availability;
+}
+
+interface ItemDAO {
+    boolean addToCart(Item item);
+    boolean removeFromCart(int id);
+    Item getItem(int id);
+    void viewCart();
+    void clearCart();
+    void checkout(double tip);
+}
+
+class ItemDAOImp {
+    Connection connection;
+    boolean addToCart(Item item);
+    boolean removeFromCart(int id);
+    Item getItem(int id);
+    void viewCart();
+    void clearCart();
+    void checkout(double tip);
+}
+
+class MenuApp {
+    Scanner scan;
+    Connection connection;
+    ItemDAO itemDAO;
+    main();
+    addItem();
+    removeItem();
+    viewCart();
+    clearCart();
+    checkout();
+}
+
+ItemDAOImp --|> ItemDAO : implements
+
+@enduml
